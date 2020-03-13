@@ -53,36 +53,28 @@ const parentCards = document.querySelector(".cards-container");
 axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then(response => {
+    console.log(response.data.articles);
     console.log(response.data.articles.javascript);
     const js = response.data.articles.javascript;
     js.forEach(item => {
       const jsCard = newCard(item);
       parentCards.append(jsCard);
-      console.log(item);
+      //   console.log(item);
     });
 
-    // deal with the response data in here
-    // const entriesData = Object.entries(response.data);
-    // console.log(`entriesData `, entriesData);
-    // // console.log(entriesData[0][1]); //object
+    const bootstrap = response.data.articles.bootstrap;
+    bootstrap.forEach(item => {
+      const bootstrapCard = newCard(item);
 
-    // //convert to array
-    // const articleArray = Object.entries(entriesData[0][1]);
-    // console.log(`articleArray `, articleArray);
+      parentCards.append(bootstrapCard);
+      //   console.log(item);
+    });
 
-    // // let newArray = articleArray.map(item => {
-    // //   // return element to new Array
-    // //   item.articleArray[1];
-    // //   console.log(newArray);
-    // // });
-
-    // articleArray.forEach(item => {
-    //   console.log(` item `, item);
-    //   articleArray[0][1].forEach(element => {
-    //     console.log(`element `, element);
-    //     parentCards.append(newCard(element));
-    //   });
-    // });
+    const tecnology = response.data.articles.tecnology;
+    tecnology.forEach(item => {
+      const tecnologyCard = newCard(item);
+      parentCards.append(tecnologyCard);
+    });
   })
   .catch(err => {
     console.log("CATCH: the data was not returned CARDS", err);
