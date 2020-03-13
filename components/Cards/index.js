@@ -34,8 +34,8 @@ function newCard(articleArray) {
   cardDivFour.classList.add("img-container");
 
   //add content ---- NOT SURE ABOUT THE CONTENT ---- CHECK THE ARRAY INSIDE DATA RESPONSE
-  cardDivTwo.textContent = `Headline: ${articleArray[0]}`;
-  cardImg.src = "";
+  cardDivTwo.textContent = `Headline: ${articleArray[1][0].headline}`;
+  cardImg.src = articleArray[1][0].authorPhoto;
   cardSpan.textContent = `Author name: ${articleArray[0]}`;
 
   //append
@@ -62,8 +62,14 @@ axios
     const articleArray = Object.entries(entriesData[0][1]);
     console.log(articleArray);
 
+    // let newArray = articleArray.map(item => {
+    //   // return element to new Array
+    //   item.articleArray[1];
+    //   console.log(newArray);
+    // });
+
     articleArray.forEach(item => {
-      articleArray[0].forEach(item => {
+      articleArray[0].forEach(element => {
         parentCards.append(newCard(item));
       });
     });
