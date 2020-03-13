@@ -17,3 +17,17 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+axios
+  .get("https://lambda-times-backend.herokuapp.com/articles")
+  .then(response => {
+    // deal with the response data in here
+    const entriesData = Object.entries(response.data);
+    console.log(entriesData);
+
+    // console.log(response);
+  })
+  .catch(err => {
+    // deal with the error in here
+    console.log("CATCH: the data was not returned", err);
+  });
