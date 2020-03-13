@@ -11,11 +11,26 @@
 axios
   .get("https://lambda-times-backend.herokuapp.com/topics")
   .then(response => {
-    // deal with the response data in here
+    response.data.topics.forEach(item => {
+      parentTab.append(newTabs(item));
+    });
 
-    console.log(response.data);
+    console.log(response);
   })
   .catch(err => {
-    // deal with the error in here
     console.log("the data was not returned", err);
   });
+
+//Creating Tab----------------------
+
+function newTabs() {
+  // create element
+  const tabOne = document.createElement("div");
+
+  //add clas
+  tabOne.classList.add("tab");
+
+  return tabOne;
+}
+
+const parentTab = document.querySelector(".topics");
