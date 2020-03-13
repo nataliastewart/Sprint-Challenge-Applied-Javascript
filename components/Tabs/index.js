@@ -15,7 +15,7 @@ axios
       parentTab.append(newTabs(item));
     });
 
-    console.log(response);
+    // console.log(response.data.topics);
   })
   .catch(err => {
     console.log("the data was not returned", err);

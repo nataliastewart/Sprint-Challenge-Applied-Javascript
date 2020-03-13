@@ -18,7 +18,7 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
-function newCard(data) {
+function newCard(articleArray) {
   //create elements
   const cardDivOne = document.createElement("div"),
     cardDivTwo = document.createElement("div"),
@@ -28,15 +28,15 @@ function newCard(data) {
     cardSpan = document.createElement("span");
 
   //add classes
-  cardOne.classList.add("card");
+  cardDivOne.classList.add("card");
   cardDivTwo.classList.add("headline");
   cardDivThree.classList.add("author");
   cardDivFour.classList.add("img-container");
 
   //add content ---- NOT SURE ABOUT THE CONTENT ---- CHECK THE ARRAY INSIDE DATA RESPONSE
-  cardDivTwo.textContent = `Headline: ${entriesData[1].headline}`;
-  cardImg.src = entriesData[1].authorPhoto;
-  cardSpan.textContent = `Author name: ${entriesData[1].authorName}`;
+  cardDivTwo.textContent = `Headline: ${articleArray[0]}`;
+  cardImg.src = "";
+  cardSpan.textContent = `Author name: ${articleArray[0]}`;
 
   //append
   cardDivOne.append(cardDivTwo);
@@ -48,16 +48,26 @@ function newCard(data) {
   return cardDivOne;
 }
 
+const parentCards = document.querySelector(".cards-container");
+
 axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then(response => {
     // deal with the response data in here
     const entriesData = Object.entries(response.data);
-    console.log(entriesData);
+    // console.log(entriesData);
+    // console.log(entriesData[0][1]); //object
 
-    // console.log(response);
+    //convert to array
+    const articleArray = Object.entries(entriesData[0][1]);
+    console.log(articleArray);
+
+    articleArray.forEach(item => {
+      articleArray[0].forEach(item => {
+        parentCards.append(newCard(item));
+      });
+    });
   })
   .catch(err => {
-    // deal with the error in here
-    console.log("CATCH: the data was not returned", err);
+    console.log("CATCH: the data was not returned CARDS", err);
   });
