@@ -31,5 +31,11 @@ function Header(data) {
   headerDiv.append(titleH1);
   headerDiv.append(spanTemp);
 
-  return;
+  return headerDiv;
 }
+
+const parentTag = document.querySelector(".header-container");
+
+data.forEach(data => {
+  parentTag.append(Header(data));
+});
