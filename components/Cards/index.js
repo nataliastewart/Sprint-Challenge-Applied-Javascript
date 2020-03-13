@@ -18,6 +18,36 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
+function newCard(data) {
+  //create elements
+  const cardDivOne = document.createElement("div"),
+    cardDivTwo = document.createElement("div"),
+    cardDivThree = document.createElement("div"),
+    cardDivFour = document.createElement("div"),
+    cardImg = document.createElement("img"),
+    cardSpan = document.createElement("span");
+
+  //add classes
+  cardOne.classList.add("card");
+  cardDivTwo.classList.add("headline");
+  cardDivThree.classList.add("author");
+  cardDivFour.classList.add("img-container");
+
+  //add content ---- NOT SURE ABOUT THE CONTENT ---- CHECK THE ARRAY INSIDE DATA RESPONSE
+  cardDivTwo.textContent = `Headline: ${entriesData[1].headline}`;
+  cardImg.src = entriesData[1].authorPhoto;
+  cardSpan.textContent = `Author name: ${entriesData[1].authorName}`;
+
+  //append
+  cardDivOne.append(cardDivTwo);
+  cardDivOne.append(cardDivThree);
+  cardDivThree.append(cardDivFour);
+  cardDivThree.append(cardSpan);
+  cardDivFour.append(cardImg);
+
+  return cardDivOne;
+}
+
 axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then(response => {

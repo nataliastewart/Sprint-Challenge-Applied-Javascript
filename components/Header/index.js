@@ -22,9 +22,9 @@ function Header(data) {
   spanTemp.classList.add("temp");
 
   //add content ---- NOT SURE ABOUT THE CONTENT ---- CHECK THE ARRAY INSIDE DATA RESPONSE
-  spanDate.textContent = "date";
-  titleH1.textContent = "title";
-  spanTemp.textContent = "temp";
+  spanDate.textContent = "SMARCH 28, 2019";
+  titleH1.textContent = "Lambda Times";
+  spanTemp.textContent = "98°";
 
   //append
   headerDiv.append(spanDate);
