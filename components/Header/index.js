@@ -22,9 +22,9 @@ function Header(data) {
   spanTemp.classList.add("temp");
 
   //add content ---- NOT SURE ABOUT THE CONTENT ---- CHECK THE ARRAY INSIDE DATA RESPONSE
-  spanDate.textContent = data.date;
-  titleH1.textContent = data.title;
-  spanTemp.textContent = data.temp;
+  spanDate.textContent = "date";
+  titleH1.textContent = "title";
+  spanTemp.textContent = "temp";
 
   //append
   headerDiv.append(spanDate);
@@ -36,6 +36,18 @@ function Header(data) {
 
 const parentTag = document.querySelector(".header-container");
 
-data.forEach(data => {
-  parentTag.append(Header(data));
-});
+axios
+  .get("https://lambda-times-backend.herokuapp.com/topics")
+  .then(response => {
+    // deal with the response data in here
+
+    response.data.topics.forEach(item => {
+      parentTag.append(Header(item));
+    });
+
+    console.log(response.data);
+  })
+  .catch(err => {
+    // deal with the error in here
+    console.log("CATCH: the data was not returned", err);
+  });
