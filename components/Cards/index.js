@@ -18,34 +18,34 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
-function newCard(articleArray) {
+function newCard(articleObject) {
   //create elements
-  const cardDivOne = document.createElement("div"),
-    cardDivTwo = document.createElement("div"),
-    cardDivThree = document.createElement("div"),
-    cardDivFour = document.createElement("div"),
+  const card = document.createElement("div"),
+    headlineDiv = document.createElement("div"),
+    authorDiv = document.createElement("div"),
+    imgDiv = document.createElement("div"),
     cardImg = document.createElement("img"),
-    cardSpan = document.createElement("span");
+    bySpan = document.createElement("span");
 
   //add classes
-  cardDivOne.classList.add("card");
-  cardDivTwo.classList.add("headline");
-  cardDivThree.classList.add("author");
-  cardDivFour.classList.add("img-container");
+  card.classList.add("card");
+  headlineDiv.classList.add("headline");
+  authorDiv.classList.add("author");
+  imgDiv.classList.add("img-container");
 
-  //add content ---- NOT SURE ABOUT THE CONTENT ---- CHECK THE ARRAY INSIDE DATA RESPONSE
-  cardDivTwo.textContent = `Headline: ${articleArray[1][0].headline}`;
-  cardImg.src = articleArray[1][0].authorPhoto;
-  cardSpan.textContent = `Author name: ${articleArray[0]}`;
+  //   add content ---- NOT SURE ABOUT THE CONTENT ---- CHECK THE ARRAY INSIDE DATA RESPONSE
+  headlineDiv.textContent = articleObject.headline;
+  cardImg.src = articleObject.authorPhoto;
+  bySpan.textContent = articleObject.authorName;
 
   //append
-  cardDivOne.append(cardDivTwo);
-  cardDivOne.append(cardDivThree);
-  cardDivThree.append(cardDivFour);
-  cardDivThree.append(cardSpan);
-  cardDivFour.append(cardImg);
+  card.append(headlineDiv);
+  card.append(authorDiv);
+  authorDiv.append(imgDiv);
+  authorDiv.append(bySpan);
+  imgDiv.append(cardImg);
 
-  return cardDivOne;
+  return card;
 }
 
 const parentCards = document.querySelector(".cards-container");
@@ -53,26 +53,36 @@ const parentCards = document.querySelector(".cards-container");
 axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then(response => {
-    // deal with the response data in here
-    const entriesData = Object.entries(response.data);
-    // console.log(entriesData);
-    // console.log(entriesData[0][1]); //object
-
-    //convert to array
-    const articleArray = Object.entries(entriesData[0][1]);
-    console.log(articleArray);
-
-    // let newArray = articleArray.map(item => {
-    //   // return element to new Array
-    //   item.articleArray[1];
-    //   console.log(newArray);
-    // });
-
-    articleArray.forEach(item => {
-      articleArray[0].forEach(element => {
-        parentCards.append(newCard(item));
-      });
+    console.log(response.data.articles.javascript);
+    const js = response.data.articles.javascript;
+    js.forEach(item => {
+      const jsCard = newCard(item);
+      parentCards.append(jsCard);
+      console.log(item);
     });
+
+    // deal with the response data in here
+    // const entriesData = Object.entries(response.data);
+    // console.log(`entriesData `, entriesData);
+    // // console.log(entriesData[0][1]); //object
+
+    // //convert to array
+    // const articleArray = Object.entries(entriesData[0][1]);
+    // console.log(`articleArray `, articleArray);
+
+    // // let newArray = articleArray.map(item => {
+    // //   // return element to new Array
+    // //   item.articleArray[1];
+    // //   console.log(newArray);
+    // // });
+
+    // articleArray.forEach(item => {
+    //   console.log(` item `, item);
+    //   articleArray[0][1].forEach(element => {
+    //     console.log(`element `, element);
+    //     parentCards.append(newCard(element));
+    //   });
+    // });
   })
   .catch(err => {
     console.log("CATCH: the data was not returned CARDS", err);
