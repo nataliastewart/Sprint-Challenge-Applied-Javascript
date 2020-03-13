@@ -44,7 +44,7 @@ axios
     const headerData = response.data.topics;
     parentTag.append(Header(headerData));
 
-    console.log(response.data);
+    // console.log(response.data);
   })
   .catch(err => {
     // deal with the error in here

@@ -53,8 +53,9 @@ const parentCards = document.querySelector(".cards-container");
 axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then(response => {
-    console.log(response.data.articles);
-    console.log(response.data.articles.javascript);
+    // console.log(response.data.articles);
+    // console.log(response.data.articles.javascript);
+
     const js = response.data.articles.javascript;
     js.forEach(item => {
       const jsCard = newCard(item);
@@ -70,9 +71,12 @@ axios
       //   console.log(item);
     });
 
-    const tecnology = response.data.articles.tecnology;
-    tecnology.forEach(item => {
+    console.log(`TECNOLOGY: `, response.data.articles.tecnology);
+
+    const technology = response.data.articles.technology;
+    technology.forEach(item => {
       const tecnologyCard = newCard(item);
+
       parentCards.append(tecnologyCard);
     });
   })
