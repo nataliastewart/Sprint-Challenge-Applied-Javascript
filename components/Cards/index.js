@@ -71,13 +71,27 @@ axios
       //   console.log(item);
     });
 
-    console.log(`TECNOLOGY: `, response.data.articles.tecnology);
+    console.log(`TECNOLOGY: `, response.data.articles);
 
     const technology = response.data.articles.technology;
     technology.forEach(item => {
-      const tecnologyCard = newCard(item);
+      const technologyCard = newCard(item);
 
-      parentCards.append(tecnologyCard);
+      parentCards.append(technologyCard);
+    });
+
+    const jquery = response.data.articles.jquery;
+    jquery.forEach(item => {
+      const jqueryCard = newCard(item);
+
+      parentCards.append(jqueryCard);
+    });
+
+    const node = response.data.articles.node;
+    node.forEach(item => {
+      const nodeCard = newCard(item);
+
+      parentCards.append(nodeCard);
     });
   })
   .catch(err => {
